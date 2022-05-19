@@ -1,15 +1,18 @@
-import { View, Text } from "react-native";
+import HomeScreen from "./screens/HomeScreen";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import themeReducer from "./redux/themeReducer";
+
+const store = createStore(
+  combineReducers({ themeReducer }),
+  applyMiddleware(thunk)
+);
 
 export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Universal React with Expo</Text>
-    </View>
+    <Provider store={store}>
+      <HomeScreen />
+    </Provider>
   );
 }
